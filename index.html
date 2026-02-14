@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Для тебя ❤️</title>
+
+<style>
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  font-family:Arial, sans-serif;
+  background:#fff0f5;
+  overflow:hidden;
+  text-align:center;
+}
+
+/* текст */
+h1{
+  font-size:28px;
+  margin-bottom:30px;
+}
+
+/* кнопки */
+.btns{
+  display:flex;
+  gap:20px;
+}
+
+button{
+  padding:14px 30px;
+  font-size:18px;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+#yes{
+  background:#ff4d6d;
+  color:white;
+}
+
+#no{
+  background:#ccc;
+}
+
+/* сердечки */
+.heart{
+  position:fixed;
+  bottom:-20px;
+  font-size:20px;
+  animation:float 5s linear infinite;
+}
+
+@keyframes float{
+  to{
+    transform:translateY(-110vh);
+    opacity:0;
+  }
+}
+
+/* картинка */
+#result{
+  display:none;
+  margin-top:25px;
+}
+
+img{
+  width:180px;
+  border-radius:20px;
+  animation:pop 0.6s ease;
+}
+
+@keyframes pop{
+  from{transform:scale(0);}
+  to{transform:scale(1);}
+}
+</style>
+</head>
+
+<body>
+
+<h1>Ты меня любишь? ❤️</h1>
+
+<div class="btns">
+  <button id="yes">ДА</button>
+  <button id="no">НЕТ</button>
+</div>
+
+<div id="result">
+  <h2>Урааа! И я тебя люблю ❤️</h2>
+  <!-- вставь сюда свою фотку -->
+  <img src="yourphoto.jpg">
+</div>
+
+<script>
+const yes = document.getElementById("yes");
+const no = document.getElementById("no");
+const result = document.getElementById("result");
+
+let yesSize = 1;
+let noSize = 1;
+
+no.onclick = () => {
+  noSize *= 0.8;
+  yesSize *= 1.2;
+
+  no.style.transform = `scale(${noSize})`;
+  yes.style.transform = `scale(${yesSize})`;
+};
+
+yes.onclick = () => {
+  result.style.display = "block";
+  document.querySelector(".btns").style.display="none";
+  startHearts();
+};
+
+function startHearts(){
+  setInterval(()=>{
+    const heart = document.createElement("div");
+    heart.className="heart";
+    heart.innerText="❤️";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.fontSize=(15+Math.random()*25)+"px";
+    document.body.appendChild(heart);
+
+    setTimeout(()=>heart.remove(),5000);
+  },200);
+}
+</script>
+
+</body>
+</html>
